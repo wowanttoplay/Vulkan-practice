@@ -1,0 +1,6 @@
+build/
+out/
+cmake-build-*/
+.idea/
+vcpkg_installed/
+.claude/
