@@ -8,5 +8,9 @@ find_package(Vulkan REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 
-add_executable(Vulkan_practice main.cpp)
+file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE HEADERS include/*.h include/*.hpp)
+
+add_executable(Vulkan_practice ${SOURCES} ${HEADERS})
+target_include_directories(Vulkan_practice PRIVATE include)
 target_link_libraries(Vulkan_practice PRIVATE Vulkan::Vulkan glfw glm::glm)
