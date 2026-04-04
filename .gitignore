@@ -2,6 +2,7 @@ build/
 out/
 cmake-build-*/
 .idea/
+.cache/
 vcpkg_installed/
 .claude/
 CLAUDE.md
