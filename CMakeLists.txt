@@ -14,3 +14,7 @@ file(GLOB_RECURSE HEADERS include/*.h include/*.hpp)
 add_executable(Vulkan_practice ${SOURCES} ${HEADERS})
 target_include_directories(Vulkan_practice PRIVATE include)
 target_link_libraries(Vulkan_practice PRIVATE Vulkan::Vulkan glfw glm::glm)
+
+add_custom_command(TARGET Vulkan_practice POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:Vulkan_practice>/shaders)

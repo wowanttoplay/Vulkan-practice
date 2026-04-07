@@ -2,7 +2,6 @@
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
-#include <vulkan/vulkan.h>
 
 #include <string>
 #include <vector>
@@ -25,13 +24,14 @@ private:
     void createLogicalDevice();
     void createSwapChain();
     void createImageViews();
-    void createGraphicsPipelines();
+    void createRenderPass();
+    void createGraphicsPipeline();
 
     bool checkValidationLayerSupport();
-    bool isDeviceSuitable(VkPhysicalDevice device);
-    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
-    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+    bool isDeviceSuitable(VkPhysicalDevice candidate);
+    bool checkDeviceExtensionSupport(VkPhysicalDevice candidate);
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice candidate);
+    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice candidate);
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
@@ -61,7 +61,8 @@ private:
     VkInstance instance{};
     VkSurfaceKHR surface{};
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-    VkDevice logicalDevice{};
+    VkDevice device{};
+    QueueFamilyIndices queueFamilyIndices;
     VkQueue graphicsQueue{};
     VkQueue presentQueue{};
     VkSwapchainKHR swapChain{};
@@ -69,4 +70,7 @@ private:
     VkFormat swapChainImageFormat{};
     VkExtent2D swapChainExtent{};
     std::vector<VkImageView> swapChainImageViews;
+    VkRenderPass renderPass{};
+    VkPipelineLayout pipelineLayout{};
+    VkPipeline graphicsPipeline{};
 };
