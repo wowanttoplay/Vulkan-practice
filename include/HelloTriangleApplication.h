@@ -26,6 +26,7 @@ private:
     void createImageViews();
     void createRenderPass();
     void createGraphicsPipeline();
+    void createFramebuffers();
 
     bool checkValidationLayerSupport();
     bool isDeviceSuitable(VkPhysicalDevice candidate);
@@ -73,4 +74,5 @@ private:
     VkRenderPass renderPass{};
     VkPipelineLayout pipelineLayout{};
     VkPipeline graphicsPipeline{};
+    std::vector<VkFramebuffer> swapChainFramebuffers;
 };
